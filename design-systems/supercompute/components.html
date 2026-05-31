@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SUPERCOMPUTE — Terminal Dossier components</title>
+    <meta
+      name="description"
+      content="Reference fixture for design-systems/supercompute. Deep navy ground,
+        brass-gold (#C9A33A) accent, JetBrains Mono throughout. Flat sheets,
+        CRT dot-grid, HUD corner brackets, zero border-radius, zero shadows."
+    />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --navy: #0a1330; --gold-warm: #C9A33A; --gold-warm-2: #b8902c;
+        --cream: #F4ECD8; --mono-blue: #6FA3E5; --hud-yellow: #E0BE3F;
+        --pink: #F472B6; --cyan: #38BDF8; --violet: #7c3aed;
+        --surface-0: #0a1330; --surface-1: #0d1f3d; --surface-2: #0a1e3d;
+        --border: #1E3A5F; --border-warm: rgba(201,163,58,0.30);
+        --success: #4ade80; --danger: #ef4444;
+        --white-90: rgba(255,255,255,.90); --white-70: rgba(255,255,255,.70);
+        --white-55: rgba(255,255,255,.55); --white-35: rgba(255,255,255,.35);
+        --white-12: rgba(255,255,255,.12); --white-08: rgba(255,255,255,.08);
+        --white-04: rgba(255,255,255,.04);
+        --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+        --s-4: 16px; --s-6: 24px; --s-8: 32px; --s-12: 48px;
+        --t-fast: .15s ease;
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: var(--font-mono); font-size: 14px; line-height: 1.7;
+        letter-spacing: .3px; background: var(--navy); color: var(--cream);
+        -webkit-font-smoothing: antialiased; padding: 48px;
+      }
+      h1 { font-size: 1.6rem; font-weight: 700; margin-bottom: var(--s-8); }
+      h2 { font-size: 1.1rem; font-weight: 700; margin-bottom: var(--s-6); color: var(--gold-warm); }
+      section { margin-bottom: var(--s-12); }
+      .demo-grid { display: flex; gap: var(--s-6); flex-wrap: wrap; align-items: flex-start; }
+      .demo-label { font-size: 10px; color: var(--mono-blue); letter-spacing: .15em; text-transform: uppercase; margin-bottom: var(--s-4); }
+
+      /* ── CMD BUTTON ── */
+      .cmd-btn {
+        font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+        letter-spacing: .12rem; text-transform: uppercase;
+        padding: 12px 22px; border: 1px solid var(--border);
+        cursor: pointer; background: transparent; color: inherit;
+        transition: var(--t-fast);
+      }
+      .cmd-btn.solid { background: var(--gold-warm); color: var(--navy); border-color: var(--gold-warm); }
+      .cmd-btn.ghost { color: var(--cream); border-color: var(--border); }
+      .cmd-btn.ghost:hover { border-color: var(--gold-warm); color: var(--gold-warm); }
+
+      /* ── SHEET ── */
+      .sheet { border: 1px solid var(--border); }
+      .sheet-row {
+        display: grid; grid-template-columns: 40px 1fr auto;
+        gap: 20px; padding: 22px 26px; border-bottom: 1px solid var(--border); align-items: start;
+      }
+      .sheet-row:last-child { border-bottom: none; }
+      .sheet-row .num { font-family: var(--font-mono); font-size: 10px; color: var(--gold-warm); }
+      .sheet-row .body { font-size: 13px; }
+      .sheet-row .price { font-family: var(--font-mono); font-size: 12px; color: var(--gold-warm); }
+
+      /* ── STATUS PILL ── */
+      .pill {
+        font-family: var(--font-mono); font-size: 8px; letter-spacing: .1em;
+        text-transform: uppercase; padding: 3px 8px; border: 1px solid;
+      }
+      .pill.live { border-color: rgba(74,222,128,0.4); color: rgba(74,222,128,0.8); }
+      .pill.build { border-color: var(--border-warm); color: var(--gold-warm); }
+
+      /* ── CARD (flat sheet) ── */
+      .flat-card {
+        background: var(--white-04); border: 1px solid var(--border);
+        padding: var(--s-6); max-width: 300px;
+      }
+      .flat-card h3 { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; margin-bottom: var(--s-2); }
+      .flat-card p { font-size: 12px; color: var(--mono-blue); line-height: 1.5; }
+
+      /* ── EYEBROW ── */
+      .eyebrow { font-size: 13px; color: var(--mono-blue); }
+      .eyebrow .caret { color: var(--gold-warm); }
+      @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+      .caret-blink { animation: blink 1s step-end infinite; }
+
+      /* ── INPUT ── */
+      .td-input {
+        font-family: var(--font-mono); font-size: 12px;
+        background: transparent; color: var(--cream);
+        border: 1px solid var(--border); padding: 10px 14px;
+        outline: none;
+      }
+      .td-input:focus { border-color: var(--gold-warm); }
+
+      /* ── CONNECT BUTTON ── */
+      .btn-connect {
+        display: block; width: 100%; font-family: var(--font-mono);
+        font-size: 11px; font-weight: 600; letter-spacing: .12rem;
+        text-transform: uppercase; text-align: center;
+        padding: 14px 20px; border: 1px solid var(--gold-warm);
+        background: var(--gold-warm); color: var(--navy); cursor: pointer;
+      }
+      .btn-connect:hover { opacity: .85; }
+    </style>
+  </head>
+  <body>
+
+    <!-- ── HEADER ── -->
+    <section>
+      <div class="eyebrow">// <span class="caret">terminal</span> · sovereign</div>
+      <h1>SUPERCOMPUTE <span style="color:var(--gold-warm)">Terminal Dossier</span></h1>
+      <p style="color:var(--mono-blue);max-width:540px">
+        Reference components for the Terminal Dossier design system.
+        Navy ground, brass-gold accent, JetBrains Mono, flat sheets,
+        zero radius, zero shadows.
+      </p>
+    </section>
+
+    <!-- ── BUTTONS ── -->
+    <section>
+      <h2>// buttons</h2>
+      <div class="demo-grid">
+        <button class="cmd-btn solid">// connect</button>
+        <button class="cmd-btn ghost">// cancel</button>
+        <button class="btn-connect" style="width:auto;padding:12px 22px">// connect</button>
+      </div>
+    </section>
+
+    <!-- ── SHEET ── -->
+    <section>
+      <h2>// sheet</h2>
+      <div class="sheet" style="max-width:600px">
+        <div class="sheet-row">
+          <span class="num">01</span>
+          <div class="body">Agent fleet operations · 13 agents online</div>
+          <span class="price">$1,200<span style="font-size:9px;color:var(--mono-blue)">/mo</span></span>
+        </div>
+        <div class="sheet-row">
+          <span class="num">02</span>
+          <div class="body">Sovereign compute · 4 validator nodes</div>
+          <span class="price">$800<span style="font-size:9px;color:var(--mono-blue)">/mo</span></span>
+        </div>
+        <div class="sheet-row">
+          <span class="num">03</span>
+          <div class="body">NewsDesk publishing · 6 articles/week</div>
+          <span class="price">$400<span style="font-size:9px;color:var(--mono-blue)">/mo</span></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── PILLS + TAGS ── -->
+    <section>
+      <h2>// status pills</h2>
+      <div class="demo-grid">
+        <span class="pill live">● online</span>
+        <span class="pill build">◆ building</span>
+        <span class="pill" style="border-color:var(--danger);color:var(--danger)">⚠ offline</span>
+      </div>
+    </section>
+
+    <!-- ── CARD ── -->
+    <section>
+      <h2>// flat card</h2>
+      <div class="demo-grid">
+        <div class="flat-card">
+          <span class="pill build" style="margin-bottom:12px;display:inline-block">// agent</span>
+          <h3>Quanta S</h3>
+          <p>Content intelligence agent. NewsDesk publishing, school curriculum, and ecosystem research on Base Chain.</p>
+        </div>
+        <div class="flat-card">
+          <span class="pill live" style="margin-bottom:12px;display:inline-block">// ops</span>
+          <h3>Hermes</h3>
+          <p>Orchestration and coordination agent. Kanban management, task dispatch, and cross-agent status tracking.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── INPUT ── -->
+    <section>
+      <h2>// input</h2>
+      <div class="demo-grid">
+        <input class="td-input" type="text" placeholder="0x address" style="width:320px" />
+        <textarea class="td-input" placeholder="// describe your task" style="width:320px;height:80px;resize:vertical"></textarea>
+      </div>
+    </section>
+
+    <!-- ── EYEBROW PROMPT ── -->
+    <section>
+      <h2>// prompt eyebrow</h2>
+      <div class="eyebrow" style="font-size:13px">
+        // <span class="caret">./agents</span> --fleet <span class="caret-blink" style="color:var(--gold-warm)">▌</span>
+      </div>
+    </section>
+
+  </body>
+</html>

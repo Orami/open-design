@@ -1,0 +1,109 @@
+/* ─────────────────────────────────────────────────────────────────────────
+ * design-systems/supercompute/tokens.css
+ *
+ * Structured token bindings for "SUPERCOMPUTE — Terminal Dossier"
+ * — sovereign Web3 infrastructure on a deep navy ground with brass-gold
+ * accent and terminal-mono typography. Flat sheets, CRT layers, HUD
+ * corner brackets. Zero rounded corners, zero shadows on body content.
+ *
+ * This file pre-compiles the values described in `DESIGN.md` into the
+ * shared schema. Agents generating a Terminal Dossier-flavored artifact
+ * should paste the `:root { … }` block verbatim into the first `<style>`
+ * of the artifact, then reference every value through `var(--name)`.
+ *
+ * Brand-specific schema decisions:
+ *
+ *   1. `--accent` is brass-gold (#C9A33A) — the single brand signal.
+ *      No other accent color is used for primary CTAs, links, or active
+ *      states. Pink (#F472B6) exists only for the logo gradient.
+ *
+ *   2. `--accent-on` is deep navy (#0a1330) — gold on navy is the
+ *      Terminal Dossier pair. Gold on cream would wash out.
+ *
+ *   3. `--radius` is 0 — Terminal Dossier has no rounded corners.
+ *      The sole exception is `--radius-pill` (9999px) for status pills.
+ *
+ *   4. Every surface has zero box-shadow. The only glow in the system
+ *      is the SC logo's drop-shadow (not a token — baked into the SVG).
+ *
+ *   5. `--font-mono` is JetBrains Mono. No sans-serif or display fonts
+ *      on shipped surfaces (Phosphate-Solid exists only for the logo).
+ * ───────────────────────────────────────────────────────────────────────── */
+
+:root {
+  /* ── Terminal Dossier palette ──────────────────────────────────────── */
+  --navy:       #0a1330;
+  --gold-warm:  #C9A33A;
+  --gold-warm-2: #b8902c;
+  --cream:      #F4ECD8;
+  --mono-blue:  #6FA3E5;
+  --hud-yellow: #E0BE3F;
+
+  /* ── Identity-moments only ──────────────────────────────────────────── */
+  --pink:       #F472B6;
+  --cyan:       #38BDF8;
+  --violet:     #7c3aed;
+
+  /* ── Semantic aliases ───────────────────────────────────────────────── */
+  --accent:     var(--gold-warm);
+  --accent-on:  var(--navy);
+  --fg:         var(--cream);
+  --text:       var(--mono-blue);
+  --bg:         var(--navy);
+
+  /* ── Surface layers ─────────────────────────────────────────────────── */
+  --surface-0:  #0a1330;            /* base, same as --bg */
+  --surface-1:  #0d1f3d;            /* elevated / hover */
+  --surface-2:  #0a1e3d;            /* card */
+  --border:     #1E3A5F;            /* standard hairline */
+  --border-warm:  rgba(201,163,58,0.30); /* brass hairline */
+
+  /* ── Status ─────────────────────────────────────────────────────────── */
+  --success:    #4ade80;
+  --warning:    var(--gold-warm);
+  --danger:     #ef4444;
+
+  /* ── On-dark alphas ─────────────────────────────────────────────────── */
+  --white-90:   rgba(255,255,255,.90);
+  --white-70:   rgba(255,255,255,.70);
+  --white-55:   rgba(255,255,255,.55);
+  --white-35:   rgba(255,255,255,.35);
+  --white-12:   rgba(255,255,255,.12);
+  --white-08:   rgba(255,255,255,.08);
+  --white-04:   rgba(255,255,255,.04);
+
+  /* ── Typography ─────────────────────────────────────────────────────── */
+  --font-mono:  'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --font-display: 'Phosphate-Solid', 'Phosphate SC', Phosphate, Impact, 'Arial Black', sans-serif;
+
+  --fs-9:    9px;
+  --fs-10:  10px;
+  --fs-11:  11px;
+  --fs-12:  12px;
+  --fs-13:  13px;
+  --fs-14:  14px;
+  --fs-base: 14px;
+
+  /* ── 4px spacing scale ──────────────────────────────────────────────── */
+  --s-1:  4px;
+  --s-2:  8px;
+  --s-3:  12px;
+  --s-4:  16px;
+  --s-5:  20px;
+  --s-6:  24px;
+  --s-8:  32px;
+  --s-10: 40px;
+  --s-12: 48px;
+  --nav-w:    220px;
+  --topbar-h: 52px;
+
+  /* ── Radii — flat by default ────────────────────────────────────────── */
+  --radius:     0;
+  --radius-pill: 9999px;
+
+  /* ── Motion ─────────────────────────────────────────────────────────── */
+  --t-fast:   .15s ease;
+  --t-base:   .20s ease;
+  --t-slow:   .60s ease;
+  --t-spring: 1.2s cubic-bezier(.34, 1.56, .64, 1);
+}
