@@ -1,0 +1,22 @@
+{
+  "$schema": "https://open-design.ai/schemas/plugin.v1.json",
+  "specVersion": "1.0.0",
+  "name": "site-supercompute-moc-overview-design-system-mr0rklrz",
+  "title": "site supercompute moc overview Design System",
+  "version": "0.1.0",
+  "description": "> Category: Custom > Surface: web > Source: [SupercomputeA/Master_Main](https://github.com/SupercomputeA/Master_Main) (git-clone) > Locked: 2026-06-27",
+  "od": {
+    "kind": "skill",
+    "taskKind": "new-generation",
+    "context": {
+      "skills": [
+        {
+          "path": "./SKILL.md"
+        }
+      ]
+    },
+    "capabilities": [
+      "prompt:inject"
+    ]
+  }
+}
