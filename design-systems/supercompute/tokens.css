@@ -11,6 +11,9 @@
  * should paste the `:root { … }` block verbatim into the first `<style>`
  * of the artifact, then reference every value through `var(--name)`.
  *
+ * Source of truth: DesignDesk/tokens-terminal-dossier.css
+ * Synced: June 2026
+ *
  * Brand-specific schema decisions:
  *
  *   1. `--accent` is brass-gold (#C9A33A) — the single brand signal.
@@ -30,19 +33,35 @@
  *      on shipped surfaces (Phosphate-Solid exists only for the logo).
  * ───────────────────────────────────────────────────────────────────────── */
 
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+@font-face {
+  font-family: 'Phosphate';
+  src: url('fonts/PhosphateSolid.ttf') format('truetype');
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* ── Terminal Dossier palette ──────────────────────────────────────── */
   --navy:       #0a1330;
-  --gold-warm:  #C9A33A;
+  --navy-2:     #0d1f3d;
+  --navy-3:     #0a1e3d;
+
+  --gold-warm:   #C9A33A;
   --gold-warm-2: #b8902c;
-  --cream:      #F4ECD8;
-  --mono-blue:  #6FA3E5;
-  --hud-yellow: #E0BE3F;
+  --gold-legacy: #FFB800;   /* OLD — DO NOT USE on new surfaces */
+
+  --cream:       #F4ECD8;
+  --mono-blue:   #6FA3E5;
+  --hud-yellow:  #E0BE3F;
 
   /* ── Identity-moments only ──────────────────────────────────────────── */
-  --pink:       #F472B6;
-  --cyan:       #38BDF8;
-  --violet:     #7c3aed;
+  --pink:        #F472B6;
+  --pink-legacy: #E91E8C;  /* OLD — DO NOT USE */
+  --cyan:        #38BDF8;
+  --violet:      #7c3aed;
 
   /* ── Semantic aliases ───────────────────────────────────────────────── */
   --accent:     var(--gold-warm);
@@ -52,16 +71,17 @@
   --bg:         var(--navy);
 
   /* ── Surface layers ─────────────────────────────────────────────────── */
-  --surface-0:  #0a1330;            /* base, same as --bg */
-  --surface-1:  #0d1f3d;            /* elevated / hover */
-  --surface-2:  #0a1e3d;            /* card */
-  --border:     #1E3A5F;            /* standard hairline */
-  --border-warm:  rgba(201,163,58,0.30); /* brass hairline */
+  --surface-0:  #0a1330;
+  --surface-1:  #0d1f3d;
+  --surface-2:  #0a1e3d;
+  --border:     #1E3A5F;
+  --border-warm:  rgba(201,163,58,0.30);
 
   /* ── Status ─────────────────────────────────────────────────────────── */
   --success:    #4ade80;
   --warning:    var(--gold-warm);
   --danger:     #ef4444;
+  --green:      #4ade80;
 
   /* ── On-dark alphas ─────────────────────────────────────────────────── */
   --white-90:   rgba(255,255,255,.90);
@@ -74,7 +94,7 @@
 
   /* ── Typography ─────────────────────────────────────────────────────── */
   --font-mono:  'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
-  --font-display: 'Phosphate-Solid', 'Phosphate SC', Phosphate, Impact, 'Arial Black', sans-serif;
+  --font-display: 'Phosphate', 'Phosphate SC', Phosphate, Impact, 'Arial Black', sans-serif;
 
   --fs-9:    9px;
   --fs-10:  10px;
@@ -83,6 +103,21 @@
   --fs-13:  13px;
   --fs-14:  14px;
   --fs-base: 14px;
+  --fs-h3:  1.1rem;
+  --fs-h2:  1.35rem;
+  --fs-h1:  1.6rem;
+  --fs-display: clamp(1.9rem, 4.5vw, 3.4rem);
+
+  --fw-400: 400; --fw-500: 500; --fw-600: 600;
+  --fw-700: 700; --fw-800: 800; --fw-900: 900;
+
+  --lh-tight: 1.08;
+  --lh-snug:  1.4;
+  --lh-body:  1.6;
+  --lh-prose: 1.8;
+
+  --tr-eyebrow: 1.5px;
+  --tr-display: -.5px;
 
   /* ── 4px spacing scale ──────────────────────────────────────────────── */
   --s-1:  4px;
@@ -99,11 +134,81 @@
 
   /* ── Radii — flat by default ────────────────────────────────────────── */
   --radius:     0;
-  --radius-pill: 9999px;
+  --r-xs: 0; --r-sm: 0; --r-md: 0;
+  --r-lg: 0; --r-xl: 0; --r-2xl: 0;
+  --r-3xl: 0;
+  --r-pill: 999px;
+  --radius-pill: 999px;
 
   /* ── Motion ─────────────────────────────────────────────────────────── */
   --t-fast:   .15s ease;
   --t-base:   .20s ease;
   --t-slow:   .60s ease;
   --t-spring: 1.2s cubic-bezier(.34, 1.56, .64, 1);
+
+  /* ── Shadows — none on body ─────────────────────────────────────────── */
+  --sh-card-hover:    none;
+  --sh-stat-hover:    none;
+  --sh-blog-hover:    none;
+  --sh-service-hover: none;
+  --sh-modal:         none;
+  --sh-glow-green:    0 0 6px rgba(74,222,128,.50);
+  --sh-glow-gold:     0 0 6px rgba(201,163,58,.40);
+
+  /* ── Gradients ───────────────────────────────────────────────────────── */
+  --grad-brand:   linear-gradient(135deg, var(--pink), var(--gold-warm));
+  --grad-agent:   linear-gradient(135deg, var(--violet), var(--cyan));
+  --grad-trade:   linear-gradient(135deg, var(--cyan), var(--pink));
+  --grad-pink:    linear-gradient(135deg, var(--pink), var(--pink-legacy));
+  --grad-progress: linear-gradient(90deg, var(--pink), var(--gold-warm));
+  --grad-hero-quanta: linear-gradient(135deg, var(--navy) 0%, #14042e 100%);
+  --grad-blob-pink: radial-gradient(circle, rgba(244,114,182,.18) 0%, transparent 70%);
+  --grad-blob-cyan: radial-gradient(circle, rgba(56,189,248,.12) 0%, transparent 70%);
+
+  /* ── Site grid ───────────────────────────────────────────────────────── */
+  --site-grid: rgba(255,255,255,.035);
+}
+
+/* ── Semantic defaults ───────────────────────────────────────────────── */
+html { font-family: var(--font-mono); }
+body {
+  font-family: var(--font-mono);
+  font-size: var(--fs-base);
+  line-height: var(--lh-body);
+  color: var(--cream);
+  background: var(--site-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 { font-size: var(--fs-h1); font-weight: var(--fw-700); line-height: var(--lh-snug); color: var(--cream); }
+h2 { font-size: var(--fs-h2); font-weight: var(--fw-700); line-height: var(--lh-snug); color: var(--cream); }
+h3 { font-size: var(--fs-h3); font-weight: var(--fw-700); line-height: var(--lh-snug); color: var(--cream); }
+
+.display {
+  font-size: var(--fs-display);
+  font-weight: var(--fw-900);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tr-display);
+  color: var(--cream);
+}
+
+.eyebrow {
+  font-size: var(--fs-10);
+  font-weight: var(--fw-700);
+  letter-spacing: var(--tr-eyebrow);
+  text-transform: uppercase;
+  color: var(--mono-blue);
+}
+.eyebrow.pink { color: var(--pink); }
+.eyebrow.cyan { color: var(--cyan); }
+
+p     { font-size: var(--fs-13); line-height: var(--lh-prose); color: var(--mono-blue); text-wrap: pretty; }
+small { font-size: var(--fs-11); color: var(--mono-blue); }
+code  { font-family: var(--font-mono); font-size: .92em; background: var(--white-08); padding: .1em .4em; border-radius: 0; }
+
+.brand-wordmark {
+  font-family: var(--font-display);
+  font-weight: var(--fw-900);
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
 }
